@@ -10,6 +10,22 @@ class App extends React.Component {
     filter: '',
   };
 
+  componentDidMount() {
+    const contacts = localStorage.getItem('contacts');
+    const parseContacts = JSON.parse(contacts);
+    if (parseContacts) {
+      this.setState({contacts:parseContacts})
+    }
+   
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts',JSON.stringify(this.state.contacts))
+    }
+ 
+  }
+
   formSubmitHandler = ({name,number}) => {
     const validName = this.state.contacts.find(contact => (
       contact.name === name
@@ -28,13 +44,11 @@ class App extends React.Component {
       ))
   }
     
-  
-
- deleteTodo = todoId => {
+  deleteTodo = todoId => {
   this.setState(prevState => ({
       contacts: prevState.contacts.filter(todo => todo.id !== todoId),
     }));
- }
+  }
   
   changeFilter = (event) => {
   
