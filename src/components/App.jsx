@@ -28,12 +28,13 @@ class App extends React.Component {
 
   formSubmitHandler = ({name,number}) => {
     const validName = this.state.contacts.find(contact => (
-      contact.name === name
+      contact.name.toLocaleLowerCase() === name.toLocaleLowerCase()
     ))
    validName ? alert(`${name} is already in contacts`) : this.addTodo(name,number)
   }
   
-  addTodo = (name,number) => {
+  addTodo = (name, number) => {
+    
     const todo = {
       id: uuidv4(),
       name: name,
