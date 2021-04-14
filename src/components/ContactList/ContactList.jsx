@@ -1,5 +1,7 @@
 import styles from './ContactList.module.css'
 import backImg from "./memphis-colorful.png"
+import { connect } from 'react-redux'
+import contactActiion from '../../redux/contacts/contacts-action'
 const ContactList = ({ contacts,deleteTodo }) => (
     <ul className={styles.list}>
     {
@@ -29,8 +31,32 @@ const ContactList = ({ contacts,deleteTodo }) => (
  ))}
 </ul>
 )
-    
+
+const getVisibleContact = (allContacts,filter) => {  
    
+    const normalizedFilter = filter.toLocaleLowerCase();
     
-export default ContactList
+   return allContacts.filter(contact =>
+    contact.name.toLocaleLowerCase().includes(normalizedFilter)
+      )
+}
+  
+
+
+
+
+const mapStateToProps = ({ contacts: { items, filter } }) => ({
+    
+    contacts: getVisibleContact(items,filter)
+});
+    
+// const mapStateToProps = state => ({
+//     contacts:state.contacts.items
+// });
+
+const mapDispatchToProps = (dispatch) => ({
+    deleteTodo:(id)=>dispatch(contactActiion.deleteContact(id))
+})
+    
+export default connect(mapStateToProps,mapDispatchToProps)(ContactList) 
 
