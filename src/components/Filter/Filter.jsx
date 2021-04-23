@@ -1,7 +1,9 @@
 import { connect } from 'react-redux'
-import contactActiion from '../../redux/contacts/contacts-action'
+import {changeFilter} from '../../redux/contacts/contacts-action'
 import PropTypes from 'prop-types';
 import styles from './Filter.module.css'
+import {getFilter} from '../../redux/contacts/contacts-selectors'
+    
 const Filter = ({ value, onChange }) => (
     <div className={styles.group}>
         <input id='filter' className={styles.formItem} type="text" required value={value} onChange={onChange} />
@@ -14,16 +16,11 @@ Filter.propTypes = {
     value:  PropTypes.string.isRequired      
 }
 
-
-
-
 const mapStateToProps = (state) => ({
-    value: state.contacts.filter
+    value: getFilter(state)
 });
 
-
-
 const mapDispatchToProps = (dispatch) => ({
-    onChange:(event)=>dispatch(contactActiion.changeFilter(event.currentTarget.value))
+    onChange:(event)=>dispatch(changeFilter(event.currentTarget.value))
 })
 export default connect(mapStateToProps,mapDispatchToProps)(Filter) 

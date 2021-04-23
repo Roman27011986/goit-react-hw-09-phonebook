@@ -1,87 +1,46 @@
 import React from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import ContactForm from './ContactForm'
 import ContactList from './ContactList'
 import Container from './Container'
 import Filter from './Filter'
+import { connect } from 'react-redux'
+import { fetchContact } from '../redux/contacts/contacts-operations'
+import Loader from "react-loader-spinner";
+import {getLoading} from '../redux/contacts/contacts-selectors'
 
 class App extends React.Component {
-  // state = {
-  //   contacts: [],
-  //   filter: '',
-  // };
 
-  // componentDidMount() {
-  //   const contacts = localStorage.getItem('contacts');
-  //   const parseContacts = JSON.parse(contacts);
-  //   if (parseContacts) {
-  //     this.setState({contacts:parseContacts})
-  //   }
-   
-  // }
-
-  // componentDidUpdate(prevProps, prevState) {
-  //   if (this.state.contacts !== prevState.contacts) {
-  //     localStorage.setItem('contacts',JSON.stringify(this.state.contacts))
-  //   }
- 
-  // }
-
-  // formSubmitHandler = ({name,number}) => {
-  //   const validName = this.state.contacts.find(contact => (
-  //     contact.name.toLocaleLowerCase() === name.toLocaleLowerCase()
-  //   ))
-  //  validName ? alert(`${name} is already in contacts`) : this.addTodo(name,number)
-  // }
+  componentDidMount() {
+    this.props.fetchContacts()
+  }
   
-  // addTodo = (name, number) => {
-    
-  //   const todo = {
-  //     id: uuidv4(),
-  //     name: name,
-  //     number:number
-  //   }
-  //   this.setState(({ contacts }) => (
-  //     {contacts:[todo,...contacts]}
-  //     ))
-  // }
-    
-  // deleteTodo = todoId => {
-  // this.setState(prevState => ({
-  //     contacts: prevState.contacts.filter(todo => todo.id !== todoId),
-  //   }));
-  // }
-  
-  // changeFilter = (event) => {
-  
-  //   this.setState({filter:event.currentTarget.value})
-  // }
-  
-  // getVisibleTodo = () => {
-  //   const { filter, contacts } = this.state
-  //   const normalizedFilter = filter.toLocaleLowerCase();
-
-  //  return contacts.filter(todo =>
-  //     todo.name.toLocaleLowerCase().includes(normalizedFilter)
-  //     )
-  // }
   render() {
    
-    
-    
-    // const visibleTodos = this.getVisibleTodo()
     return (
       
       <Container>
         <h1 style={{ textAlign: 'center' }}>Phonebook</h1>
         <ContactForm  />
         <h2 style={{ textAlign: 'center' }}>Contacts</h2>
-        {/* <Filter value={this.state.filter} onChange={this.changeFilter }/> */}
         <Filter />
-        {/* <ContactList  contacts={visibleTodos} deleteTodo={this.deleteTodo }/> */}
-        <ContactList   />
+        <ContactList />
+        {this.props.isLoading && <Loader
+                type="Rings"
+                color="blue"
+                height={100}
+                width={100}
+            />}
       </Container>
     )
   }
 }
-export default App;
+
+const mapStateToProps = state => ({
+  isLoading: getLoading(state)
+})
+
+const mapDispatchToProps = dispatch => ({
+  fetchContacts:()=>dispatch(fetchContact())
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);

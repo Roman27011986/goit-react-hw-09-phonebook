@@ -1,12 +1,12 @@
+import styles from './Container.module.css';
 
-import styles from './Container.module.css'
 const Container = ({ children }) => (
      
     <div className={styles.container}>
-         
-        {children}
+         {children}
     </div>
-)
+
+);
 
 
-export default Container
+export default Container;
