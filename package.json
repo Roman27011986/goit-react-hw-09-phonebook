@@ -4,6 +4,9 @@
   "private": true,
   "homepage": "https://Roman27011986.github.io/goit-react-hw-07-phonebook",
   "dependencies": {
+    "@material-ui/core": "^4.11.4",
+    "@material-ui/icons": "^4.11.2",
+    "@material-ui/styles": "^4.11.4",
     "@reduxjs/toolkit": "^1.5.1",
     "@testing-library/jest-dom": "^5.11.9",
     "@testing-library/react": "^11.2.5",
@@ -15,7 +18,9 @@
     "react-dom": "^17.0.2",
     "react-loader-spinner": "^4.0.0",
     "react-redux": "^7.2.3",
+    "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.3",
+    "react-toastify": "^7.0.4",
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.9",
     "redux-logger": "^3.0.6",
@@ -29,8 +34,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
-    "api-server": "json-server  --watch db.json --port 3004"
+    "deploy": "gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [

@@ -2,7 +2,8 @@ import styles from './ContactList.module.css';
 import backImg from "../../images/memphis-colorful.png";
 import { connect } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/contacts-operations';
-import {getVisibleContact} from '../../redux/contacts/contacts-selectors'
+import { getVisibleContact } from '../../redux/contacts/contacts-selectors'
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 const ContactList = ({ contacts, deleteTodo }) => (
     <ul className={styles.list}>
         {
@@ -20,7 +21,7 @@ const ContactList = ({ contacts, deleteTodo }) => (
                             <h3>{number}</h3>
                         </div>
                         <button className={styles.btnRemove} type="button" onClick={() => deleteTodo(id)}>
-                        
+                        <DeleteForeverIcon/>
                         </button>
                     </div>
                 </li>

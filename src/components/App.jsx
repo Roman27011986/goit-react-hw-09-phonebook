@@ -1,46 +1,64 @@
-import React from 'react';
-import ContactForm from './ContactForm'
-import ContactList from './ContactList'
-import Container from './Container'
-import Filter from './Filter'
-import { connect } from 'react-redux'
-import { fetchContact } from '../redux/contacts/contacts-operations'
-import Loader from "react-loader-spinner";
-import {getLoading} from '../redux/contacts/contacts-selectors'
+import React, { lazy, Suspense,Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import AppBar from './AppBar/AppBar';
+import routes from './routes';
+import { getCurrentUser } from '../redux/auth/auth-operations'
+import { connect } from 'react-redux';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
+import PublicRoute from './PublicRoute/PublicRoute';
 
-class App extends React.Component {
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+
+const HomePage = lazy(() => import('./pages/HomePage/HomePage' /* webpackChunkName: "HomePage" */));
+const ContactsPage = lazy(() => import('./pages/ContactsPage' /* webpackChunkName: "ContactsPage" */));
+const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage' /* webpackChunkName: "SignUpPage" */));
+const LogInPage = lazy(() => import('./pages/LogInPage/LogInPage' /* webpackChunkName: "LogInPage" */));
+
+
+
+class App extends Component {
 
   componentDidMount() {
-    this.props.fetchContacts()
+    this.props.onGetCurrentUser()
   }
-  
   render() {
-   
-    return (
-      
-      <Container>
-        <h1 style={{ textAlign: 'center' }}>Phonebook</h1>
-        <ContactForm  />
-        <h2 style={{ textAlign: 'center' }}>Contacts</h2>
-        <Filter />
-        <ContactList />
-        {this.props.isLoading && <Loader
-                type="Rings"
-                color="blue"
-                height={100}
-                width={100}
-            />}
-      </Container>
+    return(
+<>
+    
+        <AppBar />
+        <ToastContainer autoClose={2000} />
+        <Suspense fallback={<p>Загружаем...</p>}>
+    <Switch>
+      <Route exact path={routes.home} component={HomePage} />
+          <PrivateRoute
+            path={routes.contacts}
+            component={ContactsPage}
+            redirectTo={routes.login}
+          />
+          
+          <PublicRoute
+            path={routes.register}
+            component={SignUpPage}
+            redirectTo={routes.contacts}
+            restricted />
+          
+          <PublicRoute
+            path={routes.login}
+            component={LogInPage}
+            redirectTo={routes.contacts}
+            restricted />
+          </Switch>
+          </Suspense>
+  </>
     )
   }
-}
+  
+  
+};
+    
+const mapDispatchToProps ={
+  onGetCurrentUser: getCurrentUser,
+};
 
-const mapStateToProps = state => ({
-  isLoading: getLoading(state)
-})
-
-const mapDispatchToProps = dispatch => ({
-  fetchContacts:()=>dispatch(fetchContact())
-})
-
-export default connect(mapStateToProps,mapDispatchToProps)(App);
+export default connect(null,mapDispatchToProps)(App) ;
