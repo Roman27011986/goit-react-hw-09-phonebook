@@ -1,6 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import ContactForm from '../../ContactForm';
+// import TemporaryDrawer from '../../../components/TemporaryDrawer/TemporaryDrawer'
 import ContactList from '../../ContactList';
 import Filter from '../../Filter';
 import Loader from "react-loader-spinner";
@@ -17,9 +18,9 @@ class ContactsPage extends React.Component  {
     render(){
         return (
             <div className={styles.container}>
-            <h1 style={{ textAlign: 'center' }}>Phonebook</h1>
+            
             <ContactForm />
-            <h2 style={{ textAlign: 'center' }}>Contacts</h2>
+           {/* <TemporaryDrawer/> */}
             <Filter />
             <ContactList />
             {this.props.isLoading && <Loader
@@ -30,14 +31,14 @@ class ContactsPage extends React.Component  {
             />}
         </div>
         )
-   }
+    };
 
 };
 const mapStateToProps = state => ({
     isLoading: getLoading(state)
 });
 const mapDispatchToProps = dispatch => ({
-    fetchContacts:()=>dispatch(fetchContact())
-  })
+    fetchContacts: () => dispatch(fetchContact())
+});
 
 export default connect(mapStateToProps,mapDispatchToProps)(ContactsPage);

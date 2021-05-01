@@ -64,7 +64,7 @@ export const logOut = () => async dispatch => {
     toast.success('have a nice day!');
   } catch (error) {
     dispatch(logoutError(error.message));
-  }
+  };
 };
 
 export const getCurrentUser = () => async (dispatch, getState) => {
@@ -73,7 +73,7 @@ export const getCurrentUser = () => async (dispatch, getState) => {
   } = getState();
   if (!persistedToken) {
     return;
-  }
+  };
 
   token.set(persistedToken);
 

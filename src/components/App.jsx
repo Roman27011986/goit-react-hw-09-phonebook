@@ -21,38 +21,38 @@ class App extends Component {
 
   componentDidMount() {
     this.props.onGetCurrentUser()
-  }
+  };
   render() {
-    return(
-<>
+    return (
+      <>
     
         <AppBar />
         <ToastContainer autoClose={2000} />
         <Suspense fallback={<p>Загружаем...</p>}>
-    <Switch>
-      <Route exact path={routes.home} component={HomePage} />
-          <PrivateRoute
-            path={routes.contacts}
-            component={ContactsPage}
-            redirectTo={routes.login}
-          />
+          <Switch>
+            <Route exact path={routes.home} component={HomePage} />
+            <PrivateRoute
+              path={routes.contacts}
+              component={ContactsPage}
+              redirectTo={routes.login}
+            />
           
-          <PublicRoute
-            path={routes.register}
-            component={SignUpPage}
-            redirectTo={routes.contacts}
-            restricted />
+            <PublicRoute
+              path={routes.register}
+              component={SignUpPage}
+              redirectTo={routes.contacts}
+              restricted />
           
-          <PublicRoute
-            path={routes.login}
-            component={LogInPage}
-            redirectTo={routes.contacts}
-            restricted />
+            <PublicRoute
+              path={routes.login}
+              component={LogInPage}
+              redirectTo={routes.contacts}
+              restricted />
           </Switch>
-          </Suspense>
-  </>
-    )
-  }
+        </Suspense>
+      </>
+    );
+  };
   
   
 };

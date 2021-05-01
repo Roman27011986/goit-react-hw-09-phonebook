@@ -1,6 +1,9 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import {userLogIn  } from '../../../redux/auth/auth-operations';
+import { userLogIn } from '../../../redux/auth/auth-operations';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+import styles from './Login.module.css';
 
  class LogInPage extends React.Component {
     state = {
@@ -22,26 +25,45 @@ import {userLogIn  } from '../../../redux/auth/auth-operations';
     render() {
         const {email, password} = this.state;
         return (
-            <form   action="" onSubmit={this.handleSubmit} >
-                <label htmlFor="">
-                    email
-                    <input type="email" value={email} name="email" onChange={this.handleChange }/>
-                </label>
-                <label htmlFor="">
-                    password
-                    <input type="password"  value={password} name="password" onChange={this.handleChange }/>
-                 </label>
+            <form className={styles.loginForm} onSubmit={this.handleSubmit} >
+
+                <TextField
+                    name="email"
+                    type="email"
+                    placeholder="email"
+                    id="outlined-basic"
+                    label="email"
+                    variant="outlined"
+                    required value={email}
+                    onChange={this.handleChange} />
+
                 
-                <button  type="submit"  >Log In</button>
+                 <TextField
+                    id="outlined-password-input"
+                    name="password"
+                    type="password"
+                    placeholder="password"
+                    label="password"
+                    variant="outlined"
+                    autoComplete="current-password"
+                    required value={password}
+                    onChange={this.handleChange} />
                 
-        </form>
-        )
-    }
-}
+                <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"  >
+                    Log In
+                    </Button>
+                
+            </form>
+        );
+     };
+};
 
     
 const mapDispatchToProps ={
     onSignUp: userLogIn,
 };
  
-export default connect(null,mapDispatchToProps)(LogInPage)
+export default connect(null, mapDispatchToProps)(LogInPage);

@@ -5,15 +5,15 @@ import { connect } from 'react-redux';
 import {getIsOnline} from '../../redux/auth/auth-selectors'
 import styles from './AppBar.module.css'
 
- const AppBar = ({isAutheticated}) => (
+const AppBar = ({ isAutheticated }) => (
   
-        <header className={styles.container}>
-            <Navigation />
-            {isAutheticated ? <UserMenu/> : <AuthNav/> }
-        </header>
-)
+    <header className={styles.container}>
+        <Navigation />
+        {isAutheticated ? <UserMenu /> : <AuthNav />}
+    </header>
+);
     
 const mapStateToProps = (state) => ({
     isAutheticated: getIsOnline(state)
 });
- export default connect(mapStateToProps)(AppBar)
+export default connect(mapStateToProps)(AppBar);
