@@ -58,6 +58,7 @@
   width: 100%;
   transition: 800ms ease all;
 }
-.MuiOutlinedInput-root {
-  background-color: lightcoral;
+
+.MuiMenu-list {
+  padding: 0;
 }

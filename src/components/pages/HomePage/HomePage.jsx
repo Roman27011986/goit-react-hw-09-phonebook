@@ -1,7 +1,28 @@
+import  './HomePage.scss'
+
 const HomePage = () => (
-    <>
-        <h1>Hello from HomePage</h1>
-    </>
+    <div className="stage">
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+  <div className="layer"></div>
+</div>
 
 );
 

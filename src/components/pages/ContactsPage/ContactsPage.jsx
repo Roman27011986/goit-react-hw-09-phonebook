@@ -20,7 +20,6 @@ class ContactsPage extends React.Component  {
             <div className={styles.container}>
             
             <ContactForm />
-           {/* <TemporaryDrawer/> */}
             <Filter />
             <ContactList />
             {this.props.isLoading && <Loader

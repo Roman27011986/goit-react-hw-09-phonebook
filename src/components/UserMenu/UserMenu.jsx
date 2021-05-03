@@ -12,6 +12,21 @@ import MenuItem from '@material-ui/core/MenuItem';
 
 import PowerSettingsNewIcon from '@material-ui/icons/PowerSettingsNew';
 
+
+
+
+const btnLogOut = {
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    borderRadius: 3,
+    border: 0,
+    color: 'white',
+    height: 28,
+  boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+  position: 'relative',
+  left: '50%',
+  transform: 'translate(-50%, 0)'
+};
+
 const UserMenu = ({ avatar, email, name, onLogout }) => {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
@@ -22,8 +37,9 @@ const UserMenu = ({ avatar, email, name, onLogout }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
   return (
-    <div className={styles.container}>
+    <div >
       <Button
         aria-controls="simple-menu"
         aria-haspopup="true"
@@ -31,37 +47,27 @@ const UserMenu = ({ avatar, email, name, onLogout }) => {
         <img className={styles.user__logo} src={avatar} width='32' alt="" />
       </Button>
       <Menu
-        id="simple-menu"
-        anchorEl={anchorEl}
-        keepMounted
-        open={Boolean(anchorEl)}
-        onClose={handleClose}
-          
-        elevation={0}
-        getContentAnchorEl={null}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-            
-        }}
-        transformOrigin={{
-          vertical: 'top',
-          horizontal: 'center',
-        }}
-         
+       
+         id="simple-menu"
+         anchorEl={anchorEl}
+         keepMounted
+         open={Boolean(anchorEl)}
+         onClose={handleClose}
       >
-        <MenuItem onClick={handleClose}>{name}</MenuItem>
-        <MenuItem onClick={handleClose}> {email}</MenuItem>
-            
+     
+        <MenuItem >name: {name}</MenuItem>
+        <MenuItem >email: {email}</MenuItem>
         <Button
-          style={{ marginLeft: '30px' }}
-          color="secondary"
+          style={btnLogOut}
           variant="contained"
           type='button'
-          onClick={onLogout}>
+          onClick={onLogout}
+          >
           <PowerSettingsNewIcon />
         </Button>
-      </Menu>
+            
+        
+        </Menu>
         
     </div>
   );

@@ -80,11 +80,13 @@ class ContactForm extends React.Component {
             anchorOrigin={{
               vertical: 'bottom',
               horizontal: 'center',
+              padding:'0',
                 
             }}
             transformOrigin={{
               vertical: 'top',
               horizontal: 'center',
+              padding:'0',
             }}>
             
             <form
