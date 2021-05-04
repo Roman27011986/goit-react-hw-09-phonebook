@@ -1,15 +1,17 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {getIsOnline} from '../../redux/auth/auth-selectors'
 
 
-const PublicRoute = ({
+export default function PublicRoute  ({
   component: Component,
-  isAuthenticated,
   redirectTo,
   ...routeProps
-}) => (
+}){
+  const isAuthenticated = useSelector((state)=>getIsOnline(state))
+  return(
+    
   <Route
     {...routeProps}
     render={props =>
@@ -21,9 +23,6 @@ const PublicRoute = ({
     }
   />
 );
+  
+}  
 
-const mapStateToProps = state => ({
-  isAuthenticated: getIsOnline(state),
-});
-
-export default connect(mapStateToProps)(PublicRoute);

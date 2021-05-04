@@ -1,31 +1,45 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React,{useState} from 'react';
+import { useDispatch } from 'react-redux';
 import { userLogIn } from '../../../redux/auth/auth-operations';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import styles from './Login.module.css';
 
- class LogInPage extends React.Component {
-    state = {
-        email: '',
-        password:'',
-    }
+ export default function LogInPage() {
+  
+   const [email,setEmail] = useState('');
+   const [password,setPassword] = useState('');
 
-    handleChange =(event)=>{
-        const {name,value} = event.currentTarget
-        this.setState({[name]:value})
-    }
 
-    handleSubmit = (event) => {
-        event.preventDefault()
-        this.props.onSignUp(this.state)
-        this.setState({email: '',password:'',})
-    }
+   const handleChange =(event)=>{
+        const {name,value} = event.target;
+        switch (name) {
+            case 'email':
+                setEmail(value)
+                break;
+            case  'password':
+             setPassword(value)
+             break;
+            default:
+        console.log('error i LoginPage');;
+        }
+    };
 
-    render() {
-        const {email, password} = this.state;
+    const dispatch = useDispatch();
+
+   const handleSubmit = (event) => {
+        event.preventDefault();
+        dispatch(userLogIn({email,password}));
+        reset();
+    };
+
+      const reset = () => {
+      setEmail('');
+      setPassword('');
+  };
+
         return (
-            <form className={styles.loginForm} onSubmit={this.handleSubmit} >
+            <form className={styles.loginForm} onSubmit={handleSubmit} >
 
                 <TextField
                     name="email"
@@ -35,7 +49,7 @@ import styles from './Login.module.css';
                     label="email"
                     variant="outlined"
                     required value={email}
-                    onChange={this.handleChange} />
+                    onChange={handleChange} />
 
                 
                  <TextField
@@ -47,7 +61,7 @@ import styles from './Login.module.css';
                     variant="outlined"
                     autoComplete="current-password"
                     required value={password}
-                    onChange={this.handleChange} />
+                    onChange={handleChange} />
                 
                 <Button
                     variant="contained"
@@ -58,12 +72,5 @@ import styles from './Login.module.css';
                 
             </form>
         );
-     };
+     
 };
-
-    
-const mapDispatchToProps ={
-    onSignUp: userLogIn,
-};
- 
-export default connect(null, mapDispatchToProps)(LogInPage);

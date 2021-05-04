@@ -1,35 +1,51 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React,{useState} from 'react';
+import {  useDispatch } from 'react-redux';
 import { userSignUp } from '../../../redux/auth/auth-operations';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import styles from './SignUp.module.css'
 
-class SignUpPage extends React.Component {
-    state = {
-        name: '',
-        email: '',
-        password: '',
+export default function SignUpPage() {
+    
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+   const handleChange = (event) => {
+        const { name, value } = event.target;
+         switch (name) {
+             case 'name':
+             setName(value)
+                   break;
+                   case 'email':
+             setEmail(value)
+                   break;
+                   case 'password':
+             setPassword(value)
+                   break;
+             default:
+                 console.log('error from SignUpPage');;
+         };
+       
     };
 
-    handleChange = (event) => {
-        const { name, value } = event.currentTarget
-        this.setState({ [name]: value })
-    };
+    const dispatch = useDispatch()
 
-    handleSubmit = (event) => {
+   const handleSubmit = (event) => {
         event.preventDefault();
-        this.props.onSignUp(this.state);
-        this.setState({ name: '', email: '', password: '', })
+        dispatch(userSignUp({name,email,password}));
+        reset();
     };
 
-    render() {
-
-        const { name, email, password } = this.state;
+    const reset = () => {
+      setName('')
+      setEmail('')
+      setPassword('')
+  };
 
         return (
 
-            <form className={styles.signForm}  onSubmit={this.handleSubmit} >
+            <form className={styles.signForm}  onSubmit={handleSubmit} >
 
                 <TextField
                     name="name"
@@ -39,7 +55,7 @@ class SignUpPage extends React.Component {
                     label="Name"
                     variant="outlined"
                     required value={name}
-                    onChange={this.handleChange} />
+                    onChange={handleChange} />
                 
                 <TextField
                     name="email"
@@ -49,7 +65,7 @@ class SignUpPage extends React.Component {
                     label="email"
                     variant="outlined"
                     required value={email}
-                    onChange={this.handleChange} />
+                    onChange={handleChange} />
                 
                 <TextField
                     id="outlined-password-input"
@@ -60,7 +76,7 @@ class SignUpPage extends React.Component {
                     variant="outlined"
                     autoComplete="current-password"
                     required value={password}
-                    onChange={this.handleChange} />
+                    onChange={handleChange} />
 
                 <Button
                     variant="contained"
@@ -71,15 +87,6 @@ class SignUpPage extends React.Component {
                 
             </form>
         )
-    }
+    
 };
 
-// const mapStateToProps = (state) => ({
-//     contacts: getVisibleContact(state)
-// });
-    
-const mapDispatchToProps ={
-    onSignUp: userSignUp,
-};
- 
-export default connect(null, mapDispatchToProps)(SignUpPage);

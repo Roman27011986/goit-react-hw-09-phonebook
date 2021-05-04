@@ -1,5 +1,5 @@
 import React from 'react';
-import { connect } from 'react-redux';
+import { useSelector,useDispatch } from 'react-redux';
 import { getEmail ,getName} from '../../redux/auth/auth-selectors';
 import { logOut } from '../../redux/auth/auth-operations';
 import avatar from '../../images/bussiness-man.png';
@@ -27,7 +27,7 @@ const btnLogOut = {
   transform: 'translate(-50%, 0)'
 };
 
-const UserMenu = ({ avatar, email, name, onLogout }) => {
+export default function UserMenu()  {
   const [anchorEl, setAnchorEl] = React.useState(null);
 
   const handleClick = (event) => {
@@ -37,6 +37,11 @@ const UserMenu = ({ avatar, email, name, onLogout }) => {
   const handleClose = () => {
     setAnchorEl(null);
   };
+
+  const name = useSelector((state)=>getName(state));
+   const email = useSelector((state)=>getEmail(state));
+
+   const dispatch = useDispatch()
 
   return (
     <div >
@@ -61,26 +66,15 @@ const UserMenu = ({ avatar, email, name, onLogout }) => {
           style={btnLogOut}
           variant="contained"
           type='button'
-          onClick={onLogout}
+          onClick={()=>dispatch(logOut())}
           >
           <PowerSettingsNewIcon />
         </Button>
             
-        
         </Menu>
         
     </div>
   );
 };
 
-const mapStateToProps = (state) => ({
-    name:getName(state),
-    email: getEmail(state),
-    avatar:avatar
-});
-    
-const mapDispatchToProps ={
-    onLogout: logOut,
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(UserMenu);

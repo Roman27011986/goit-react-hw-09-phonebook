@@ -1,15 +1,16 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import {getIsOnline} from '../../redux/auth/auth-selectors'
 
-const PrivateRoute = ({
+export default function PrivateRoute  ({
     component: Component,
-    isAuthenticated,
     redirectTo,
     ...routeProps
-  }) => (
+  }) {
+    const isAuthenticated = useSelector((state)=>getIsOnline(state))
+    return(
     <Route
       {...routeProps}
       render={props =>
@@ -17,9 +18,7 @@ const PrivateRoute = ({
       }
     />
   );
+    
+  }
   
-  const mapStateToProps = state => ({
-    isAuthenticated:getIsOnline(state),
-  });
-  
-  export default connect(mapStateToProps)(PrivateRoute);
+ 

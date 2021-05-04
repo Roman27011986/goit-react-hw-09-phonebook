@@ -1,11 +1,19 @@
-import styles from './ContactList.module.css';
-import backImg from "../../images/memphis-colorful.png";
-import { connect } from 'react-redux';
+import {useSelector,useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/contacts-operations';
 import { getVisibleContact } from '../../redux/contacts/contacts-selectors'
 import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
-const ContactList = ({ contacts, deleteTodo }) => (
-    <ul className={styles.list}>
+import backImg from "../../images/memphis-colorful.png";
+import styles from './ContactList.module.css';
+
+
+export default function ContactList()  {
+
+    const contacts = useSelector((state)=>getVisibleContact(state));
+    const dispatch = useDispatch();
+
+    
+    return(
+        <ul className={styles.list}>
         {
             contacts.map(({ id, name, number }) => (
                 <li key={id} id={styles.cardWrapper} >
@@ -20,7 +28,7 @@ const ContactList = ({ contacts, deleteTodo }) => (
                         <div className={styles.details}>
                             <h3>{number}</h3>
                         </div>
-                        <button className={styles.btnRemove} type="button" onClick={() => deleteTodo(id)}>
+                        <button className={styles.btnRemove} type="button" onClick={() => dispatch(deleteContact(id))}>
                         <DeleteForeverIcon/>
                         </button>
                     </div>
@@ -28,16 +36,6 @@ const ContactList = ({ contacts, deleteTodo }) => (
 
             ))}
     </ul>
-);
-
-
-const mapStateToProps = (state) => ({
-    contacts: getVisibleContact(state)
-});
+    )
     
-const mapDispatchToProps = (dispatch) => ({
-    deleteTodo: (id) => dispatch(deleteContact(id))
-});
-    
-export default connect(mapStateToProps, mapDispatchToProps)(ContactList);
-
+};

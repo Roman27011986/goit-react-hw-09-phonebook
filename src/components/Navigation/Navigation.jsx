@@ -1,5 +1,5 @@
 import { NavLink } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getIsOnline } from '../../redux/auth/auth-selectors';
 import {getAllContacts} from '../../redux/contacts/contacts-selectors'
 import styles from './Navigation.module.css'
@@ -10,7 +10,11 @@ import Badge from '@material-ui/core/Badge';
 import Tooltip from '@material-ui/core/Tooltip';
 
 
-const Navigation = ({ isAuthenticated, isBageValue }) => {
+export default function Navigation () {
+
+const isAuthenticated = useSelector((state)=>getIsOnline(state));
+const isBageValue = useSelector((state)=>getAllContacts(state).length)
+
   return (
     <>
       <nav className={styles.wrapper}>
@@ -43,10 +47,5 @@ const Navigation = ({ isAuthenticated, isBageValue }) => {
   );
 };
 
-const mapStateToProps = state => ({
-  isAuthenticated: getIsOnline(state),
-  isBageValue:getAllContacts(state).length
-});
 
-export default connect(mapStateToProps)(Navigation);
  

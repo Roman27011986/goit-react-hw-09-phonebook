@@ -1,9 +1,9 @@
-import React, { lazy, Suspense,Component } from 'react';
+import React, { lazy, Suspense,useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
 import AppBar from './AppBar/AppBar';
 import routes from './routes';
 import { getCurrentUser } from '../redux/auth/auth-operations'
-import { connect } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
 
@@ -15,14 +15,15 @@ const ContactsPage = lazy(() => import('./pages/ContactsPage' /* webpackChunkNam
 const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage' /* webpackChunkName: "SignUpPage" */));
 const LogInPage = lazy(() => import('./pages/LogInPage/LogInPage' /* webpackChunkName: "LogInPage" */));
 
+export default function App()  {
 
+  const dispatch = useDispatch();
 
-class App extends Component {
+  useEffect(() => {
+    dispatch(getCurrentUser())
+  }, []);
 
-  componentDidMount() {
-    this.props.onGetCurrentUser()
-  };
-  render() {
+  
     return (
       <>
     
@@ -52,13 +53,8 @@ class App extends Component {
         </Suspense>
       </>
     );
-  };
-  
-  
 };
     
-const mapDispatchToProps ={
-  onGetCurrentUser: getCurrentUser,
-};
 
-export default connect(null,mapDispatchToProps)(App) ;
+
+
