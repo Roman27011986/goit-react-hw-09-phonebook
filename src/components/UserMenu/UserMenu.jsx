@@ -1,9 +1,10 @@
-import React from 'react';
+import React,{useState,useCallback} from 'react';
 import { useSelector,useDispatch } from 'react-redux';
 import { getEmail ,getName} from '../../redux/auth/auth-selectors';
 import { logOut } from '../../redux/auth/auth-operations';
 import avatar from '../../images/bussiness-man.png';
 import Button from '@material-ui/core/Button';
+import Tooltip from '@material-ui/core/Tooltip';
 import styles from './UserMenu.module.css';
 
 
@@ -28,7 +29,7 @@ const btnLogOut = {
 };
 
 export default function UserMenu()  {
-  const [anchorEl, setAnchorEl] = React.useState(null);
+  const [anchorEl, setAnchorEl] = useState(null);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -37,20 +38,26 @@ export default function UserMenu()  {
   const handleClose = () => {
     setAnchorEl(null);
   };
+  
+  const dispatch = useDispatch();
 
-  const name = useSelector((state)=>getName(state));
-   const email = useSelector((state)=>getEmail(state));
+  const onLogOut = useCallback(() => dispatch(logOut()),[dispatch]) ;
 
-   const dispatch = useDispatch()
+  const name = useSelector(getName);
+  const email = useSelector(getEmail);
+
+  
 
   return (
     <div >
+      <Tooltip title='User menu'>
       <Button
         aria-controls="simple-menu"
         aria-haspopup="true"
         onClick={handleClick}>
         <img className={styles.user__logo} src={avatar} width='32' alt="" />
-      </Button>
+        </Button>
+        </Tooltip>
       <Menu
        
          id="simple-menu"
@@ -66,7 +73,7 @@ export default function UserMenu()  {
           style={btnLogOut}
           variant="contained"
           type='button'
-          onClick={()=>dispatch(logOut())}
+          onClick={onLogOut}
           >
           <PowerSettingsNewIcon />
         </Button>

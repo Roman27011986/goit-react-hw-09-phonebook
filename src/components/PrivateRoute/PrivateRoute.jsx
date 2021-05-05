@@ -5,20 +5,26 @@ import { useSelector } from 'react-redux';
 import {getIsOnline} from '../../redux/auth/auth-selectors'
 
 export default function PrivateRoute  ({
-    component: Component,
-    redirectTo,
+  redirectTo,
+  children,
     ...routeProps
   }) {
     const isAuthenticated = useSelector((state)=>getIsOnline(state))
-    return(
+  return(
+      
     <Route
       {...routeProps}
-      render={props =>
-        isAuthenticated ? <Component {...props} /> : <Redirect to={redirectTo} />
+       >
+        {
+        isAuthenticated
+          ?
+          children
+          :
+          <Redirect to={redirectTo} />
       }
-    />
+    </Route>
   );
     
-  }
+};
   
  

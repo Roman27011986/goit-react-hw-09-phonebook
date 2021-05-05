@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import { useDispatch } from 'react-redux';
-import { userLogIn } from '../../../redux/auth/auth-operations';
+import { userLogIn } from '../../redux/auth/auth-operations';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import styles from './Login.module.css';

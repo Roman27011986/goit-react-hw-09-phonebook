@@ -12,7 +12,7 @@ import Tooltip from '@material-ui/core/Tooltip';
 
 export default function Navigation () {
 
-const isAuthenticated = useSelector((state)=>getIsOnline(state));
+const isAuthenticated = useSelector(getIsOnline);
 const isBageValue = useSelector((state)=>getAllContacts(state).length)
 
   return (

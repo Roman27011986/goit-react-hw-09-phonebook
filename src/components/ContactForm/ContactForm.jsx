@@ -1,8 +1,7 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
+import { useSelector,useDispatch } from 'react-redux'
 import style from './ContactForm.module.css';
 import { addContact } from '../../redux/contacts/contacts-operations';
-import { useSelector,useDispatch } from 'react-redux'
-
 import { getAllContacts } from '../../redux/contacts/contacts-selectors';
 import TextField from '@material-ui/core/TextField';
 

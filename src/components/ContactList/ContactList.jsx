@@ -8,7 +8,7 @@ import styles from './ContactList.module.css';
 
 export default function ContactList()  {
 
-    const contacts = useSelector((state)=>getVisibleContact(state));
+    const contacts = useSelector(getVisibleContact);
     const dispatch = useDispatch();
 
     

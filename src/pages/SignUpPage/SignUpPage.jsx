@@ -1,6 +1,6 @@
 import React,{useState} from 'react';
 import {  useDispatch } from 'react-redux';
-import { userSignUp } from '../../../redux/auth/auth-operations';
+import { userSignUp } from '../../redux/auth/auth-operations';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import styles from './SignUp.module.css'

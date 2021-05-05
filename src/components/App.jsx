@@ -10,46 +10,57 @@ import PublicRoute from './PublicRoute/PublicRoute';
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const HomePage = lazy(() => import('./pages/HomePage/HomePage' /* webpackChunkName: "HomePage" */));
-const ContactsPage = lazy(() => import('./pages/ContactsPage' /* webpackChunkName: "ContactsPage" */));
-const SignUpPage = lazy(() => import('./pages/SignUpPage/SignUpPage' /* webpackChunkName: "SignUpPage" */));
-const LogInPage = lazy(() => import('./pages/LogInPage/LogInPage' /* webpackChunkName: "LogInPage" */));
+const HomePage = lazy(() => import('../pages/HomePage/HomePage' /* webpackChunkName: "HomePage" */));
+const ContactsPage = lazy(() => import('../pages/ContactsPage' /* webpackChunkName: "ContactsPage" */));
+const SignUpPage = lazy(() => import('../pages/SignUpPage/SignUpPage' /* webpackChunkName: "SignUpPage" */));
+const LogInPage = lazy(() => import('../pages/LogInPage/LogInPage' /* webpackChunkName: "LogInPage" */));
 
-export default function App()  {
+export default function App() {
 
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getCurrentUser())
-  }, []);
+  }, [dispatch]);
 
-  
     return (
       <>
-    
         <AppBar />
+
         <ToastContainer autoClose={2000} />
+
         <Suspense fallback={<p>Загружаем...</p>}>
+
           <Switch>
+
             <Route exact path={routes.home} component={HomePage} />
+
             <PrivateRoute
               path={routes.contacts}
-              component={ContactsPage}
               redirectTo={routes.login}
-            />
-          
+            >
+              <ContactsPage/>
+              </PrivateRoute>
+
             <PublicRoute
               path={routes.register}
-              component={SignUpPage}
               redirectTo={routes.contacts}
-              restricted />
-          
+              restricted >
+              
+              <SignUpPage />
+
+            </PublicRoute>
+            
             <PublicRoute
               path={routes.login}
-              component={LogInPage}
               redirectTo={routes.contacts}
-              restricted />
+              restricted >
+              <LogInPage />
+              
+            </PublicRoute>
+            
           </Switch>
+
         </Suspense>
       </>
     );

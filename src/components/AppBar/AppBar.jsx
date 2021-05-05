@@ -6,7 +6,7 @@ import {getIsOnline} from '../../redux/auth/auth-selectors'
 import styles from './AppBar.module.css'
 
 export default function AppBar ()  {
-  const isAutheticated = useSelector(state => getIsOnline(state));
+  const isAutheticated = useSelector(getIsOnline);
     return(
         <header className={styles.container}>
         <Navigation />

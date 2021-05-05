@@ -1,20 +1,20 @@
 import React,{useEffect} from 'react';
 import {  useSelector,useDispatch } from 'react-redux';
-import ContactForm from '../../ContactForm';
-import ContactList from '../../ContactList';
-import Filter from '../../Filter';
+import ContactForm from '../../components/ContactForm';
+import ContactList from '../../components/ContactList';
+import Filter from '../../components/Filter';
 import Loader from "react-loader-spinner";
-import {getLoading} from '../../../redux/contacts/contacts-selectors'
+import {getLoading} from '../../redux/contacts/contacts-selectors'
 import styles from './Container.module.css';
-import { fetchContact } from '../../../redux/contacts/contacts-operations'
+import { fetchContact } from '../../redux/contacts/contacts-operations'
 
 export default function ContactsPage()  {
     const dispatch= useDispatch();
-    const isLoading = useSelector((state)=>getLoading(state))
+    const isLoading = useSelector(getLoading)
     
     useEffect(()=>{
         dispatch(fetchContact())
-    },[])
+    },[dispatch])
      
         return (
             <div className={styles.container}>
