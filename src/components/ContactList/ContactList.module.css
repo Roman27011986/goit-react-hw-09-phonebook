@@ -14,9 +14,6 @@
 }
 
 .card {
-  /* grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
-  grid-auto-rows: 240px;
-  grid-gap: 12px; */
   position: fixed;
   width: 100%;
   height: 100%;
@@ -34,7 +31,7 @@
   grid-auto-rows: 240px;
   grid-gap: 12px;
   transform: rotateY(180deg);
-  background: #8bd7d3;
+  background: #3f51b5;
   z-index: 1;
 }
 
@@ -106,9 +103,6 @@
 }
 
 .btnRemove {
-  /* position: fixed;
-  right: 10px;
-  top: 10px; */
   position: absolute;
   top: 1px;
   right: 1px;

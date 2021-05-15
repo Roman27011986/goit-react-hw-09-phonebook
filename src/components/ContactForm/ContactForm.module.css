@@ -13,7 +13,7 @@
   background-repeat: no-repeat;
 }
 
-.MuiOutlinedInputoot {
+.textField {
   background-color: beige;
   height: 55px;
   border-radius: 3px;
@@ -57,8 +57,4 @@
 .btn:hover:after {
   width: 100%;
   transition: 800ms ease all;
-}
-
-.MuiMenu-list {
-  padding: 0;
 }

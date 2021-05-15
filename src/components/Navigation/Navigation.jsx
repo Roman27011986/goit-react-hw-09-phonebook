@@ -22,7 +22,7 @@ const isBageValue = useSelector((state)=>getAllContacts(state).length)
           <li className={styles.list__item}>
             <Tooltip title="Home">
               <NavLink to={routes.home} exact activeClassName={styles.active} className={styles.link}>
-                <Home fontSize="large" />
+                <Home fontSize="large"/>
               </NavLink>
             </Tooltip>
           </li>

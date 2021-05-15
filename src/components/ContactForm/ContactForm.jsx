@@ -10,6 +10,31 @@ import Menu from '@material-ui/core/Menu';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Tooltip from '@material-ui/core/Tooltip';
 
+import { withStyles } from '@material-ui/core/styles';
+const StyledMenu = withStyles({
+  paper: {
+    
+    '& .MuiList-padding': {
+      padding: '0px',
+   }
+  },
+  
+})((props) => (
+  <Menu
+    elevation={0}
+    getContentAnchorEl={null}
+    anchorOrigin={{
+      vertical: 'bottom',
+      horizontal: 'center',
+    }}
+    transformOrigin={{
+      vertical: 'top',
+      horizontal: 'center',
+    }}
+    {...props}
+  />
+));
+
 
 export default function ContactForm() {
 
@@ -71,25 +96,15 @@ export default function ContactForm() {
             </Button>
           </Tooltip>
 
-          <Menu
-            id="simple-menu"
+          <StyledMenu
+            id="customized-menu"
             anchorEl={anchorEl}
             keepMounted
             open={Boolean(anchorEl)}
             onClose={handleClose}
             elevation={0}
             getContentAnchorEl={null}
-            anchorOrigin={{
-              vertical: 'bottom',
-              horizontal: 'center',
-              
-                
-            }}
-            transformOrigin={{
-              vertical: 'top',
-              horizontal: 'center',
-              
-            }}>
+            >
             
             <form
               className={style.form}
@@ -97,7 +112,7 @@ export default function ContactForm() {
             >
               
               <TextField
-                className={style.MuiOutlinedInputoot}
+                className={style.textField}
                 label="Name"
                 name="name"
                 variant="outlined"
@@ -112,7 +127,7 @@ export default function ContactForm() {
               />
                     
               <TextField
-                className={style.MuiOutlinedInputoot}
+                className={style.textField}
                 label="number"
                 name="number"
                 variant="outlined"
@@ -128,7 +143,7 @@ export default function ContactForm() {
                 
             </form>
 
-          </Menu>
+          </StyledMenu>
             
         </>
         
