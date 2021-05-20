@@ -6,8 +6,9 @@ import { getCurrentUser } from '../redux/auth/auth-operations'
 import { useDispatch } from 'react-redux';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
-
+import Battary from './Battary/Battary'
 import { ToastContainer } from "react-toastify";
+import { useBattery } from "react-use";
 import "react-toastify/dist/ReactToastify.css";
 
 const HomePage = lazy(() => import('../pages/HomePage/HomePage' /* webpackChunkName: "HomePage" */));
@@ -16,7 +17,7 @@ const SignUpPage = lazy(() => import('../pages/SignUpPage/SignUpPage' /* webpack
 const LogInPage = lazy(() => import('../pages/LogInPage/LogInPage' /* webpackChunkName: "LogInPage" */));
 
 export default function App() {
-
+  const {isSupported} = useBattery()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -25,6 +26,7 @@ export default function App() {
 
     return (
       <>
+        {isSupported && <Battary/>}
         <AppBar />
 
         <ToastContainer autoClose={2000} />
