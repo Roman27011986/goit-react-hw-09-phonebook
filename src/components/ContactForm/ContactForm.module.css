@@ -1,16 +1,13 @@
 .form {
+  display: flex;
   padding: 10px;
   width: 420px;
   height: 210px;
   border-radius: 2%;
-  display: flex;
   flex-wrap: wrap;
-  margin-left: auto;
-  margin-right: auto;
   background-image: url('../../images/users-1266418_1280.jpg');
   background-size: cover;
   justify-content: flex-end;
-  background-repeat: no-repeat;
 }
 
 .textField {
@@ -26,7 +23,6 @@
   width: 222px;
   height: 40px;
   font-size: 1em;
-
   cursor: pointer;
   transition: 800ms ease all;
   outline: none;

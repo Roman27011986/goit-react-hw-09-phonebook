@@ -1,9 +1,12 @@
 import {useSelector,useDispatch } from 'react-redux';
 import { deleteContact } from '../../redux/contacts/contacts-operations';
 import { getVisibleContact } from '../../redux/contacts/contacts-selectors'
-import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import backImg from "../../images/memphis-colorful.png";
 import styles from './ContactList.module.css';
+
+//material-ui import
+
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 
 export default function ContactList()  {
@@ -12,30 +15,28 @@ export default function ContactList()  {
     const dispatch = useDispatch();
 
     
-    return(
+    return (
         <ul className={styles.list}>
-        {
-            contacts.map(({ id, name, number }) => (
-                <li key={id} id={styles.cardWrapper} >
-                    <div id={styles.cardFront} className={styles.card} style={{ backgroundImage: backImg }}>
-                        <div id={styles.cube}>
-                            <div className={styles.face || styles.cubeTop} > <p>{name}</p></div>
-                            <div className={styles.face || styles.cubeLeft}><p>{name}</p></div>
-                            <div className={styles.face || styles.cubeRight}><p>{name}</p></div>
+            {
+                contacts.map(({ id, name, number }) => (
+                    <li key={id} id={styles.listItem} >
+                        <div id={styles.cardFront} className={styles.card} style={{ backgroundImage: backImg }}>
+                            <div >
+                                <div className={styles.face || styles.cubeTop} ><p>{name}</p></div>
+                            </div>
                         </div>
-                    </div>
-                    <div id={styles.cardBack} className={styles.card}>
-                        <div className={styles.details}>
-                            <h3>{number}</h3>
+                        <div id={styles.cardBack} className={styles.card}>
+                            <div className={styles.details}>
+                                <p>phone: {number}</p>
+                            </div>
+                            <button className={styles.btnRemove} type="button" onClick={() => dispatch(deleteContact(id))}>
+                                <DeleteForeverIcon />
+                            </button>
                         </div>
-                        <button className={styles.btnRemove} type="button" onClick={() => dispatch(deleteContact(id))}>
-                        <DeleteForeverIcon/>
-                        </button>
-                    </div>
-                </li>
+                    </li>
 
-            ))}
-    </ul>
-    )
+                ))}
+        </ul>
+    );
     
 };

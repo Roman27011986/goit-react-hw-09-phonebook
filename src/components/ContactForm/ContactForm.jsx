@@ -1,19 +1,24 @@
-import React, { useState } from 'react';
-import { useSelector,useDispatch } from 'react-redux'
-import style from './ContactForm.module.css';
+import { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { addContact } from '../../redux/contacts/contacts-operations';
 import { getAllContacts } from '../../redux/contacts/contacts-selectors';
-import TextField from '@material-ui/core/TextField';
 
+import style from './ContactForm.module.css';
+
+//material.ui import
+
+import TextField from '@material-ui/core/TextField';
 import Button from "@material-ui/core/Button";
 import Menu from '@material-ui/core/Menu';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Tooltip from '@material-ui/core/Tooltip';
-
 import { withStyles } from '@material-ui/core/styles';
+
+
+
 const StyledMenu = withStyles({
   paper: {
-    
     '& .MuiList-padding': {
       padding: '0px',
    }
@@ -42,6 +47,9 @@ export default function ContactForm() {
   const [number, setNumber] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
 
+  const contacts = useSelector(state => getAllContacts(state));
+  const dispatch = useDispatch();
+
   const handleChange = (event) => {
     const {name,value} = event.target;
     switch (name) {
@@ -53,13 +61,9 @@ export default function ContactForm() {
         break;
       default:
         console.log('switch ContactForm error!');
-    }
+    };
    };
 
-
-  const contacts = useSelector(state => getAllContacts(state));
-  
-  const dispatch = useDispatch();
 
  const handleSubmit = (event) => {
     event.preventDefault()

@@ -9,9 +9,6 @@
   margin-left: auto;
   margin-right: auto;
 }
-#cardWrapper {
-  transform: translate(-0%, -0%);
-}
 
 .card {
   position: fixed;
@@ -23,7 +20,10 @@
   backface-visibility: hidden;
 }
 #cardFront {
-  background: url(../../images/weather.png);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: url(../../images/vintage-wallpaper.png);
   z-index: 2;
 }
 #cardBack {
@@ -31,42 +31,22 @@
   grid-auto-rows: 240px;
   grid-gap: 12px;
   transform: rotateY(180deg);
-  background: #3f51b5;
+  background: url(../../images/regal.png);
   z-index: 1;
 }
 
-#cube {
-  position: absolute;
-  top: 25%;
-  left: 10%;
-}
-
 .face {
-  transform-origin: 0 0;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 50px;
-  height: 50px;
+  color: #fff;
 }
 
-.cubeTop {
-  background: #cbefe8;
-  transform: rotate(210deg) skew(-30deg) scaleY(0.864);
-}
-.cubeLeft {
-  background: #52aca2;
-  transform: rotate(90deg) skewX(-30deg) scaleY(0.864);
-}
-.cubeRight {
-  background: #8bd7d3;
-  transform: rotate(-30deg) skewX(-30deg) scaleY(0.864);
+#listItem {
+  transform: translate(-0%, -0%);
 }
 
-#cardWrapper:hover #cardFront {
+#listItem:hover #cardFront {
   transform: rotateY(180deg);
 }
-#cardWrapper:hover #cardBack {
+#listItem:hover #cardBack {
   transform: rotateY(0deg);
   z-index: 3;
 }
@@ -78,27 +58,11 @@
   width: 280px;
   transform: translate(-50%, -50%);
 }
-.details h3 {
-  font-family: 'Cabin', sans-serif;
-  color: white;
-  font-size: 14pt;
-  letter-spacing: 0.3rem;
-  text-align: center;
-}
 .details p {
   font-family: 'Cabin', sans-serif;
-  color: white;
-  font-size: 8pt;
-  letter-spacing: 0.3rem;
-  text-align: center;
-}
-.details span {
-  position: relative;
-  top: 70px;
-  font-family: 'Cabin', sans-serif;
-  color: white;
-  font-size: 8pt;
-  letter-spacing: 0.3rem;
+  color: rgb(99, 101, 102);
+  font-size: 14pt;
+  letter-spacing: 0.1rem;
   text-align: center;
 }
 
@@ -116,11 +80,10 @@
   border: none;
   border-radius: 50%;
   background-color: transparent;
-  color: #fff;
+  color: rgb(163, 0, 0);
   cursor: pointer;
   transition: background-color var(--animation-duration) var(--timing-function);
   outline: none;
-
   background-position: center;
   background-size: 50%;
   background-repeat: no-repeat;
