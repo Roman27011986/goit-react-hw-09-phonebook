@@ -1,12 +1,15 @@
-import React, { lazy, Suspense,useEffect } from 'react';
+import { lazy, Suspense,useEffect } from 'react';
 import { Route, Switch } from 'react-router-dom';
+
 import AppBar from './AppBar/AppBar';
-import routes from './routes';
-import { getCurrentUser } from '../redux/auth/auth-operations'
-import { useDispatch } from 'react-redux';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
-import Battary from './Battary/Battary'
+import Battary from './Battary/Battary';
+import routes from './routes';
+
+import { getCurrentUser } from '../redux/auth/auth-operations';
+import { useDispatch } from 'react-redux';
+
 import { ToastContainer } from "react-toastify";
 import { useBattery } from "react-use";
 import "react-toastify/dist/ReactToastify.css";
@@ -17,7 +20,7 @@ const SignUpPage = lazy(() => import('../pages/SignUpPage/SignUpPage' /* webpack
 const LogInPage = lazy(() => import('../pages/LogInPage/LogInPage' /* webpackChunkName: "LogInPage" */));
 
 export default function App() {
-  const {isSupported} = useBattery()
+  const { isSupported } = useBattery()
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -26,7 +29,8 @@ export default function App() {
 
     return (
       <>
-        {isSupported && <Battary/>}
+        {isSupported && <Battary />}
+        
         <AppBar />
 
         <ToastContainer autoClose={2000} />
@@ -41,9 +45,11 @@ export default function App() {
               path={routes.contacts}
               redirectTo={routes.login}
             >
-              <ContactsPage/>
-              </PrivateRoute>
 
+              <ContactsPage />
+              
+            </PrivateRoute>
+            
             <PublicRoute
               path={routes.register}
               redirectTo={routes.contacts}
@@ -52,17 +58,18 @@ export default function App() {
               <SignUpPage />
 
             </PublicRoute>
-            
+
             <PublicRoute
               path={routes.login}
               redirectTo={routes.contacts}
               restricted >
-              <LogInPage />
               
-            </PublicRoute>
-            
-          </Switch>
+              <LogInPage />
 
+            </PublicRoute>
+
+          </Switch>
+          
         </Suspense>
       </>
     );

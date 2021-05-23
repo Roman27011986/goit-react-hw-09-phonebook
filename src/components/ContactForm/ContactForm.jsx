@@ -13,9 +13,31 @@ import Button from "@material-ui/core/Button";
 import Menu from '@material-ui/core/Menu';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
 import Tooltip from '@material-ui/core/Tooltip';
-import { withStyles } from '@material-ui/core/styles';
+import { fade, withStyles } from '@material-ui/core/styles';
+import InputBase from '@material-ui/core/InputBase';
 
-
+const BootstrapInput = withStyles((theme) => ({
+  root: {
+    'label + &': {
+      marginTop: theme.spacing(3),
+    },
+  },
+  input: {
+      borderRadius: 4,
+      borderColor:'blue',
+    position: 'relative',
+    backgroundColor: theme.palette.common.white,
+    border: '1px solid #ced4da',
+    fontSize: 16,
+    width: 'auto',
+    padding: '10px 12px',
+    transition: theme.transitions.create(['border-color', 'box-shadow']),
+    '&:focus': {
+      boxShadow: `${fade(theme.palette.primary.main, 0.25)} 0 0 0 0.2rem`,
+      borderColor: theme.palette.primary.main,
+    },
+  },
+}))(InputBase);
 
 const StyledMenu = withStyles({
   paper: {
@@ -92,12 +114,14 @@ export default function ContactForm() {
       return (
         <>
           <Tooltip title="AddContact">
+
             <Button
               aria-controls="simple-menu"
               aria-haspopup="true"
               onClick={handleClick}>
               <PersonAddIcon fontSize="large" color="primary" />
             </Button>
+            
           </Tooltip>
 
           <StyledMenu
@@ -115,8 +139,8 @@ export default function ContactForm() {
                onSubmit={handleSubmit}
             >
               
-              <TextField
-                className={style.textField}
+              <BootstrapInput
+                
                 label="Name"
                 name="name"
                 variant="outlined"
@@ -130,8 +154,8 @@ export default function ContactForm() {
                 value={name}
               />
                     
-              <TextField
-                className={style.textField}
+              <BootstrapInput
+                
                 label="number"
                 name="number"
                 variant="outlined"

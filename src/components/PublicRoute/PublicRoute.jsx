@@ -1,8 +1,7 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import {getIsOnline} from '../../redux/auth/auth-selectors'
-
+import { getIsOnline } from '../../redux/auth/auth-selectors';
 
 export default function PublicRoute  ({
   redirectTo,
@@ -26,6 +25,5 @@ export default function PublicRoute  ({
       }
   </Route>
 );
-  
 };
 

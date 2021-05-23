@@ -1,6 +1,8 @@
-import {useSelector,useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+
 import { deleteContact } from '../../redux/contacts/contacts-operations';
 import { getVisibleContact } from '../../redux/contacts/contacts-selectors'
+
 import backImg from "../../images/memphis-colorful.png";
 import styles from './ContactList.module.css';
 
@@ -10,10 +12,8 @@ import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 
 
 export default function ContactList()  {
-
     const contacts = useSelector(getVisibleContact);
     const dispatch = useDispatch();
-
     
     return (
         <ul className={styles.list}>
@@ -34,9 +34,7 @@ export default function ContactList()  {
                             </button>
                         </div>
                     </li>
-
                 ))}
         </ul>
     );
-    
 };

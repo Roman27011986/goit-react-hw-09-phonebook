@@ -9,7 +9,7 @@ export default function PrivateRoute  ({
   children,
     ...routeProps
   }) {
-    const isAuthenticated = useSelector((state)=>getIsOnline(state))
+    const isAuthenticated = useSelector(getIsOnline)
   return(
       
     <Route
@@ -24,7 +24,6 @@ export default function PrivateRoute  ({
       }
     </Route>
   );
-    
 };
   
  

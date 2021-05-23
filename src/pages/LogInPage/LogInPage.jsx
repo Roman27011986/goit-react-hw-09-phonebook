@@ -1,15 +1,15 @@
-import React,{useState} from 'react';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { userLogIn } from '../../redux/auth/auth-operations';
+
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+
 import styles from './Login.module.css';
 
  export default function LogInPage() {
-  
    const [email,setEmail] = useState('');
    const [password,setPassword] = useState('');
-
 
    const handleChange =(event)=>{
         const {name,value} = event.target;
@@ -21,8 +21,8 @@ import styles from './Login.module.css';
              setPassword(value)
              break;
             default:
-        console.log('error i LoginPage');;
-        }
+        console.log('error in LoginPage');;
+       }
     };
 
     const dispatch = useDispatch();
@@ -32,12 +32,10 @@ import styles from './Login.module.css';
         dispatch(userLogIn({email,password}));
         reset();
     };
-
       const reset = () => {
       setEmail('');
       setPassword('');
   };
-
         return (
             <form className={styles.loginForm} onSubmit={handleSubmit} >
 
@@ -51,7 +49,6 @@ import styles from './Login.module.css';
                     required value={email}
                     onChange={handleChange} />
 
-                
                  <TextField
                     id="outlined-password-input"
                     name="password"
@@ -72,5 +69,4 @@ import styles from './Login.module.css';
                 
             </form>
         );
-     
 };
